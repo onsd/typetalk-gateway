@@ -27,9 +27,9 @@ app.post("/webhook", (req, res) => {
   const requestId = req.body.post.id;
   let message = requestMessage.replace("　", " ").split(' ');
   let sendMessage = '';
-  const sw = (message[0] === '課題くれ')
+  const isBacklog = (message[0] === '課題くれ')
 
-  axios.post(sw ? APP2 : APP1, {"request": sw ? ' ': message[0]} ).then(
+  axios.post(isBacklog ? APP2 : APP1, {"request": isBacklog ? ' ': message[0]} ).then(
     response =>{
       console.log(response.data.response)
       if(response.data.response.length !== 0){
