@@ -6,9 +6,8 @@ const bodyParser = require('body-parser');
 
 const port = 5000;
 
-//const APP1 = 'https://nowdir.falconfusa.now.sh/'
-const APP1 = 'https://now-flask.onsd.now.sh/'
-const APP2 = 'https://backlog-search-service.ripicea.now.sh/'
+const customResponseService = 'https://now-flask.onsd.now.sh/'
+const backlogService = 'https://backlog-search-service.ripicea.now.sh/'
 
 // Body parser
 app.use(bodyParser());
@@ -29,7 +28,7 @@ app.post("/webhook", (req, res) => {
   let sendMessage = '';
   const isBacklog = (message[0] === '課題くれ')
 
-  axios.post(isBacklog ? APP2 : APP1, {"request": isBacklog ? ' ': message[0]} ).then(
+  axios.post(isBacklog ? backlogService : customResponseService, {"request": isBacklog ? ' ': message[0]} ).then(
     response =>{
       console.log(response.data.response)
       if(response.data.response.length !== 0){
